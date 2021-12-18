@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-learning System</title>
+</head>
+<body>
+
+    <div id="student_signup">
+        <h2>Signup as a Student</h2><hr>
+        <form method="post" action="/signup/student">
+            <label>Firstname: </label>
+            <input type="text" name="fname" maxlength="20" required><br>
+            <label>Lastname: </label>
+            <input type="text" name="lname" maxlength="20" required><br>
+            <label>Email: </label>
+            <input type="email" name="email" maxlength="50" required><br>
+            <label>Password: </label>
+            <input type="password" name="password" maxlength="30" placeholder="8-30 characters" required><br>
+            <input type="submit" value="SIGNUP">
+            <a href="/login/student">Already have an account?</a>
+        </form>
+    </div>
+    <p th:text="${signupmessage}"></p>
+
+
+</body>
+</html>

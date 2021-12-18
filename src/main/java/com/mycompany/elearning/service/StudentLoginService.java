@@ -6,14 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudentSignupService {
+public class StudentLoginService {
     @Autowired
     private StudentRepo studentRepo;
 
-    public boolean isEmailTaken(String email){
-        return studentRepo.existsByEmail(email);
-    }
-    public void saveStudent(Student student){
-        studentRepo.save(student);
+    public Student getStudentByEmail(String email){
+        return studentRepo.findByEmail(email);
     }
 }

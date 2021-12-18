@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>E-learning System</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
 </head>
 <body>
-    <h1>Hello World!</h1>
+    <h3>Are you a Student or a Teacher?</h3>
+    <input type="button" value="Student" onclick="location.href='/signup/student';"><input type="button" value="Teacher" onclick="location.href='/signup/teacher';">
 </body>
 </html>
