@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -24,7 +25,7 @@ public class StudentLoginController {
     }
 
     @PostMapping("/login/student")
-    public String loginStudent(@ModelAttribute UserPojo user, RedirectAttributes redirectAttributes, HttpSession session){
+    public String loginStudent(@ModelAttribute UserPojo user, RedirectAttributes redirectAttributes, HttpServletRequest request){
         Student student = studentLoginService.getStudentByEmail(user.getEmail());
         if(student==null){
             redirectAttributes.addFlashAttribute("loginmessage","No user found");
@@ -35,8 +36,8 @@ public class StudentLoginController {
             return "redirect:/login/student";
         }
 
-        session.setAttribute("userId",student.getId());
-        session.setMaxInactiveInterval(1000);
-        return "redirect:/student";
+        request.getSession().setAttribute("userId",student.getId());
+        request.getSession().setMaxInactiveInterval(1000);
+        return "redirect:/student/courses";
     }
 }

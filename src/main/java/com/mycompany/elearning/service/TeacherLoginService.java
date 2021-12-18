@@ -13,4 +13,8 @@ public class TeacherLoginService {
     public Teacher getTeacherByEmail(String email){
         return teacherRepo.findByEmail(email);
     }
+
+    public Teacher getTeacherById(int id){
+        return teacherRepo.getById(id);
+    }
 }

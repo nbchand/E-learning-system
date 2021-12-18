@@ -29,4 +29,12 @@ public class PatternMatcher {
         return matcher.matches();
     }
 
+    public static boolean checkCourseCodePattern(String code){
+        final String CODE_REGEX = "^([A-Z]{1,5}[ ]{1}[0-9]{1,5})";
+        //validates code which is in the form of (A-Z 0-9) e.g. (CMP 112)
+        final Pattern PATTERN = Pattern.compile(CODE_REGEX);
+        Matcher matcher = PATTERN.matcher(code);
+        return matcher.matches();
+    }
+
 }

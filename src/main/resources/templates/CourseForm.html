@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <style>
+        .wrap{
+            width: 18em;
+            margin-left: 40%;
+            margin-top: 10%;
+        }
+    </style>
+    <title>E-learning System</title>
+</head>
+<body>
+
+<div class="wrap">
+    <h2>Course Information</h2><hr>
+    <form method="post" action="/course">
+        <label>Course Name</label><br>
+        <input type="text" name="name" maxlength="50" required><br>
+        <label>Course Code</label><br>
+        <input type="text" name="code" maxlength="10" required><br>
+        <label>Credit hour</label><br>
+        <input type="number" name="credit" class="w-50" min="1" max="5" required><br>
+        <input type="SUBMIT" class="btn btn-lg btn-success w-50 mt-3" value="OK">
+    </form>
+    <div class="container alert alert-danger mt-2 text-center" th:unless="${#strings.isEmpty(coursemsg)}" th:text="${coursemsg}"></div>
+</div>
+
+</body>
+</html>
