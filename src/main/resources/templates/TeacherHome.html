@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>E-learning System</title>
 </head>
 <body>
@@ -25,11 +26,13 @@
         </form>
     </div>
 </nav>
+
 <div class="p-5 ">
     <h2 class="text-center">Your Courses</h2><hr>
     <button type="button" class="btn btn-success btn-lg my-3 d-block" onclick="location.href='/teacher/course-form';">Create Course</button>
 
     <th:block th:if="${courses}">
+        <div class="white">
         <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -48,11 +51,12 @@
                 <td th:text="${course.name}"></td>
                 <td th:text="${course.code}"></td>
                 <td th:text="${course.credit}"></td>
-                <td><a href="#">Remove</a> | <a href="#">Edit</a></td>
+                <td><a class="del" href="#" th:id="'r'+${course.id}">Remove</a> | <a href="#" th:id="'e'+${course.id}">Edit</a></td>
             </tr>
 
             </tbody>
         </table>
+        </div>
     </th:block>
 
     <div th:unless="${courses}" class="container alert alert-success text-center">You have not created any courses</div>
@@ -61,8 +65,10 @@
         <div class="footer-copyright text-center py-3">© 2021 Copyright:
             <a href="https://mdbootstrap.com/"> narendrachand.com</a>
         </div>
-
     </footer>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script th:src="@{/js/TeacherHome.js}"></script>
 </body>
 </html>

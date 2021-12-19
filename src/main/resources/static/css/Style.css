@@ -1,3 +1,9 @@
+body{
+    background-image: url("../image/studying.png");
+}
+.white{
+    background: white;
+}
 .mynav{
     background-color: #FFAE42;
 }

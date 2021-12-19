@@ -64,4 +64,14 @@ public class StudentCourseController {
         studentCourseService.enrollInCourse(courseIds,studentId);
         return "success";
     }
+
+    @DeleteMapping(value = "/student/course/{id}")
+    @ResponseBody
+    public String leaveCourse(@PathVariable int id,HttpServletRequest request) {
+        if(request.getSession().getAttribute("userId")==null){
+            return "failed";
+        }
+        studentCourseService.removeCourse(id,(int)request.getSession().getAttribute("userId"));
+        return "success";
+    }
 }

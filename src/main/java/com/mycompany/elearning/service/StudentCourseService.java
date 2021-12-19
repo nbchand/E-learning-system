@@ -40,4 +40,13 @@ public class StudentCourseService {
         student.setCourses(studentCourses);
         studentRepo.save(student);
     }
+
+    public void removeCourse(int courseId,int studentId){
+        Course course = courseRepo.getById(courseId);
+        Student student = studentRepo.getById(studentId);
+        List<Course> courses = student.getCourses();
+        courses.remove(course);
+        student.setCourses(courses);
+        studentRepo.save(student);
+    }
 }

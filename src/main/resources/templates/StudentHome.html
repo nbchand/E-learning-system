@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -36,6 +36,7 @@
         <div th:if="${courses.isEmpty()}" class="container alert alert-primary text-center">Enrolled courses will appear here</div>
 
 
+        <div class="white">
         <table th:unless="${courses.isEmpty()}" class="table">
         <thead class="thead-dark">
         <tr>
@@ -54,11 +55,12 @@
             <td th:text="${course.code}"></td>
             <td th:text="${course.credit}"></td>
             <td th:text="${course.teacher.fname}+' '+${course.teacher.lname}"></td>
-            <td><a href="#">Remove</a></td>
+            <td><a href="#" class="del" th:id="${course.id}">Remove</a></td>
         </tr>
 
         </tbody>
     </table>
+        </div>
 
    </th:block>
 
@@ -72,5 +74,7 @@
     </div>
 </footer>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script th:src="@{/js/StudentHome.js}"></script>
 </body>
 </html>

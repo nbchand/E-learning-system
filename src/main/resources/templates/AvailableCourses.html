@@ -39,6 +39,7 @@
     <th:block th:if="${courses}">
 
         <form id="courseForm" method="post" action="/student/enroll">
+            <div class="white">
         <table class="table">
             <thead class="thead-dark">
             <tr>
@@ -63,6 +64,7 @@
 
             </tbody>
         </table>
+            </div>
         <button type="submit" id="joinBtn" class="btn btn-success btn-lg d-block">JOIN</button>
     </form>
     </th:block>
@@ -81,48 +83,6 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script>
-    $('#courseForm').submit(function(event) {
-        event.preventDefault();
-
-        var courses = [];
-        $("input:checkbox:checked").each(function () {
-            courses.push($(this).val());
-        });
-
-        if (courses.length === 0) {
-            $('#jsError').html("<div class='alert-danger mt-3 p-2 text-center h3'>No courses selected</div>");
-            window.scrollTo(0, 0);
-            return;
-        }
-        ;
-
-        const data = JSON.stringify(courses);
-        console.log(data);
-        fetch("/student/enroll", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: data,
-        })
-            .then(response => response.text())
-            .then(data => {
-                if(data=="unavailable"){
-                    location.href = "/"
-                }
-                else if(data=="success"){
-                    location.href = "/student/courses";
-                }
-                else{
-                    $('#jsError').html("<div class='alert-danger mt-3 p-2 text-center h3'>"+data+"</div>");
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-
-    })
-</script>
+<script th:src="@{/js/AvailableCourses.js}"></script>
 </body>
 </html>
