@@ -1,6 +1,7 @@
 package com.mycompany.elearning.controller;
 
 import com.mycompany.elearning.model.Course;
+import com.mycompany.elearning.service.CourseService;
 import com.mycompany.elearning.service.TeacherCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class TeacherCourseController {
 
     @Autowired
     private TeacherCourseService teacherCourseService;
+
+    @Autowired
+    private CourseService courseService;
 
     @GetMapping("/teacher/courses")
     public String showTeacherCourses(HttpServletRequest request, Model model){
@@ -46,7 +50,7 @@ public class TeacherCourseController {
         if(request.getSession().getAttribute("userId")==null){
             return "failed";
         }
-        teacherCourseService.removeCourse(id,(int)request.getSession().getAttribute("userId"));
+        courseService.removeCourse(id);
         return "success";
     }
 }

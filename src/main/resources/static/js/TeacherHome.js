@@ -7,7 +7,7 @@ $('.del').on('click',function(event){
     })
         .then(response => response.text())
         .then(data => {
-            if(data==failed){
+            if(data=="failed"){
                 return
             }
             location.href = "/teacher/courses";
