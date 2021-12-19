@@ -25,6 +25,10 @@ public class CourseService {
     @Autowired
     private TeacherRepo teacherRepo;
 
+    public Course getCourseById(int id){
+        return courseRepo.getById(id);
+    }
+
     public void registerCourse(Course course){
         courseRepo.save(course);
     }

@@ -53,4 +53,19 @@ public class TeacherCourseController {
         courseService.removeCourse(id);
         return "success";
     }
+
+    @GetMapping("/teacher/edit-course/{id}")
+    public String showEditCoursePage(@PathVariable int id, Model model, HttpServletRequest request){
+        if(request.getSession().getAttribute("userId")==null){
+            return "redirect:/";
+        }
+        Course course = courseService.getCourseById(id);
+        try{
+            System.out.println(course);
+        }catch (Exception e){
+            return "redirect:/teacher/courses";
+        }
+        model.addAttribute("course", course);
+        return "EditCourse";
+    }
 }
