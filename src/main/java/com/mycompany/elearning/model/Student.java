@@ -3,6 +3,7 @@ package com.mycompany.elearning.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Student implements Serializable {
 
     private static final long serialVersionUID = 2L;
@@ -33,5 +35,6 @@ public class Student implements Serializable {
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
+    @ToString.Exclude
     private List<Course> courses;
 }

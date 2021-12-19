@@ -3,6 +3,7 @@ package com.mycompany.elearning.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Teacher implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,5 +30,6 @@ public class Teacher implements Serializable {
     @Column
     private String lname;
     @OneToMany(mappedBy = "teacher")
+    @ToString.Exclude
     private List<Course> courses;
 }

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/Style.css}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -11,38 +12,57 @@
     <title>E-learning System</title>
 </head>
 <body>
+<nav class="mynav navbar navbar-expand-lg navbar-light" style="position: sticky; top:0; z-index: 2;">
+    <a class="navbar-brand" href="/teacher/courses">E-learning system</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarText">
+        <form class="form-inline ml-auto my-2 my-lg-0" action="/logout" method="GET">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Logout</button>
+        </form>
+    </div>
+</nav>
 <div class="p-5 ">
     <h2 class="text-center">Your Courses</h2><hr>
-    <button type="button" class="btn btn-success btn-lg my-3 d-block" onclick="location.href='/course-form';">Create Course</button>
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">S.N</th>
-            <th scope="col">Course Name</th>
-            <th scope="col">Course Code</th>
-            <th scope="col">Credit hour</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>OOP in C++</td>
-            <td>CMP 112</td>
-            <td>3.0</td>
-            <td><a href="#">Remove</a> | <a href="#">Edit</a></td>
-        </tr>
+    <button type="button" class="btn btn-success btn-lg my-3 d-block" onclick="location.href='/teacher/course-form';">Create Course</button>
 
-        <tr>
-            <th scope="row">2</th>
-            <td>Physics</td>
-            <td>MEC 112</td>
-            <td>4.0</td>
-            <td><a href="#">Remove</a> | <a href="#">Edit</a></td>
-        </tr>
+    <th:block th:if="${courses}">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">S.N</th>
+                <th scope="col">Course Name</th>
+                <th scope="col">Course Code</th>
+                <th scope="col">Credit hour</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
 
-        </tbody>
-    </table>
+            <tbody>
+
+            <tr th:each="course, iStat : ${courses}">
+                <th scope="row" th:text="${iStat.count}"></th>
+                <td th:text="${course.name}"></td>
+                <td th:text="${course.code}"></td>
+                <td th:text="${course.credit}"></td>
+                <td><a href="#">Remove</a> | <a href="#">Edit</a></td>
+            </tr>
+
+            </tbody>
+        </table>
+    </th:block>
+
+    <div th:unless="${courses}" class="container alert alert-success text-center">You have not created any courses</div>
+
+    <footer class="myfooter page-footer font-small indigo">
+        <div class="footer-copyright text-center py-3">© 2021 Copyright:
+            <a href="https://mdbootstrap.com/"> narendrachand.com</a>
+        </div>
+
+    </footer>
 </div>
 </body>
 </html>
