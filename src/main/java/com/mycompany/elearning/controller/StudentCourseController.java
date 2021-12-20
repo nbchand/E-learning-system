@@ -31,6 +31,9 @@ public class StudentCourseController {
         if(request.getSession().getAttribute("userId")==null){
             return "redirect:/";
         }
+        if(!request.getSession().getAttribute("user").equals("student")){
+            return "redirect:/teacher/courses";
+        }
         Student student = studentLoginService.getStudentById((int)request.getSession().getAttribute("userId"));
         model.addAttribute("courses",student.getCourses());
         return "StudentHome";
@@ -40,6 +43,9 @@ public class StudentCourseController {
     public String showAvailableCourses(HttpServletRequest request, Model model){
         if(request.getSession().getAttribute("userId")==null){
             return "redirect:/";
+        }
+        if(!request.getSession().getAttribute("user").equals("student")){
+            return "redirect:/teacher/courses";
         }
         List<Course> courses = studentCourseService.getCoursesForStudent((int)request.getSession().getAttribute("userId"));
         if(courses.isEmpty()){
@@ -56,6 +62,9 @@ public class StudentCourseController {
         if(request.getSession().getAttribute("userId")==null){
             return "unavailable";
         }
+        if(!request.getSession().getAttribute("user").equals("student")){
+            return "teacher";
+        }
         if(courseIds.length==0){
             return "Select atleast one course";
         }
@@ -70,6 +79,9 @@ public class StudentCourseController {
     public String leaveCourse(@PathVariable int id,HttpServletRequest request) {
         if(request.getSession().getAttribute("userId")==null){
             return "failed";
+        }
+        if(!request.getSession().getAttribute("user").equals("student")){
+            return "teacher";
         }
         studentCourseService.removeCourse(id,(int)request.getSession().getAttribute("userId"));
         return "success";

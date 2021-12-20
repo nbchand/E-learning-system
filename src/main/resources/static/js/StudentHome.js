@@ -8,7 +8,11 @@ $('.del').on('click',function(event){
         .then(response => response.text())
         .then(data => {
             if(data=="failed"){
-                return
+                return;
+            }
+            if(data=="teacher"){
+                location.href = "/teacher/courses";
+                return;
             }
             location.href = "/student/courses";
             console.log(data);

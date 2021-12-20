@@ -37,6 +37,7 @@ public class TeacherLoginController {
         }
 
         request.getSession().setAttribute("userId",teacher.getId());
+        request.getSession().setAttribute("user","teacher");
         request.getSession().setMaxInactiveInterval(1000);
         return "redirect:/teacher/courses";
     }

@@ -29,6 +29,9 @@ public class CourseController {
         if(request.getSession().getAttribute("userId")==null){
             return "redirect:/";
         }
+        if(!request.getSession().getAttribute("user").equals("teacher")){
+            return "redirect:/student/courses";
+        }
         if(course.getName().equals("")||course.getName().equals(" ")){
             redirectAttributes.addFlashAttribute("coursemsg","Course name required");
             return "redirect:/teacher/course-form";
@@ -49,9 +52,24 @@ public class CourseController {
     }
 
     @PostMapping("/edit/course/{id}")
-    public String editCourse(@PathVariable int id, @ModelAttribute Course course, HttpServletRequest request){
+    public String editCourse(@PathVariable int id, @ModelAttribute Course course, RedirectAttributes redirectAttributes, HttpServletRequest request){
         if(request.getSession().getAttribute("userId")==null){
             return "redirect:/";
+        }
+        if(!request.getSession().getAttribute("user").equals("teacher")){
+            return "redirect:/student/courses";
+        }
+        if(course.getName().equals("")||course.getName().equals(" ")){
+            redirectAttributes.addFlashAttribute("coursemsg","Course name required");
+            return "redirect:/teacher/edit-course/"+id;
+        }
+        if(course.getCredit()>5||course.getCredit()<1){
+            redirectAttributes.addFlashAttribute("coursemsg","Credit hours must be between 1-5");
+            return "redirect:/teacher/edit-course/"+id;
+        }
+        if(!PatternMatcher.checkCourseCodePattern(course.getCode())){
+            redirectAttributes.addFlashAttribute("coursemsg","Course code invalid (Format example: CMP 112)");
+            return "redirect:/teacher/edit-course/"+id;
         }
         Course course2 = courseService.getCourseById(id);
         course2.setName(course.getName());

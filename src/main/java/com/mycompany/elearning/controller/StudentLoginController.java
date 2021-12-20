@@ -37,6 +37,7 @@ public class StudentLoginController {
         }
 
         request.getSession().setAttribute("userId",student.getId());
+        request.getSession().setAttribute("user","student");
         request.getSession().setMaxInactiveInterval(1000);
         return "redirect:/student/courses";
     }

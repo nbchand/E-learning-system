@@ -26,7 +26,10 @@ $('#courseForm').submit(function(event) {
         .then(response => response.text())
         .then(data => {
             if(data=="unavailable"){
-                location.href = "/"
+                location.href = "/";
+            }
+            else if(data=="teacher"){
+                location.href = "/teacher/course";
             }
             else if(data=="success"){
                 location.href = "/student/courses";
